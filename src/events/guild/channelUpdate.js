@@ -8,7 +8,7 @@ module.exports = {
       for (const data of chanDatas) {
         const guild = client.guilds.cache.get(data.guildID);
 
-        data.name = `${guild.name} #${newC.name} Announcements`;
+        data.name = `${guild.name} #${newC.name}`;
         await data.save();
 
         for (const whData of data.subs) {

@@ -12,7 +12,7 @@ module.exports = {
           continue;
         }
 
-        data.name = `${newG.name} #${chan.name} Announcements`;
+        data.name = `${newG.name} #${chan.name}`;
         await data.save();
 
         for (const whData of data.subs) {

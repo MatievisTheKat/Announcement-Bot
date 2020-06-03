@@ -1,5 +1,6 @@
 module.exports = {
   name: "setup",
+  usage: "",
   description: "Set up a follow-able channel in the current server",
   requiredPerms: ["MANAGE_GUILD"],
   requiredClientPerms: ["MANAGE_WEBHOOKS", "MANAGE_CHANNELS"],
@@ -61,8 +62,8 @@ module.exports = {
               .then((m) => m.delete({ timeout: 10 * 1000 }).catch(() => {}));
 
           data.channelID = chan.id;
-          data.name = `${msg.guild.name} #${chan.name} Announcements`;
-          data.avatarURL = msg.guild.iconURL();
+          data.name = `${msg.guild.name} #${chan.name}`;
+          data.avatarURL = msg.guild.iconURL({ format: "png" });
           guildData.channels.push(chan.id);
 
           message.channel.send(

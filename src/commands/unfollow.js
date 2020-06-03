@@ -2,6 +2,7 @@ module.exports = {
   name: "unfollow",
   description: "Un-Follow a channel using its ID",
   requiredPerms: ["MANAGE_WEBHOOKS"],
+  usage: "{channel ID}",
   requiredClientPerms: ["MANAGE_WEBHOOKS"],
   examples: ["700670099853410345"],
   run: async (msg, args, flags) => {
@@ -11,7 +12,7 @@ module.exports = {
     if (!chanData)
       return msg.channel.send(
         new msg.client.embed().error(
-          `This channel not following **${chanData.name}**`
+          `That channel is not an announcement channel`
         )
       );
 
@@ -51,24 +52,24 @@ module.exports = {
 
     await webhookData.delete().catch(() => {});
 
-    msg.channel.send(
-      new msg.client.embed().success(
-        `Successfully unfollowed **${chanData.name}**`
-      )
-    );
-
     chanData.subCount--;
-    chanData.subs.slice(
+    chanData.subs.splice(
       chanData.subs.indexOf({
         token: webhookData.token,
         id: webhookData.id,
       }),
-      0
+      1
     );
     await chanData.save();
 
     await chan.setTopic(
       `Followers: ${chanData.subCount} | Use \`${msg.client.prefix}follow ${chanData.channelID}\` to follow this channel!`
+    );
+
+    msg.channel.send(
+      new msg.client.embed().success(
+        `Successfully unfollowed **${chanData.name}**`
+      )
     );
   },
 };

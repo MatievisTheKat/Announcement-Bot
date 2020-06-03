@@ -9,10 +9,15 @@ module.exports = {
         .trim()
         .split(/ +/gi);
 
-      const flags = {};
-      const flagArgs = args.filter((a) => a.startsWith("--"));
-      flagArgs.map((flag) => (flags[flag] = true));
+      const flagArgs = args
+        .filter((a) => a.startsWith("--"))
+        .map((x) => x.slice(2));
       args = args.filter((a) => !a.startsWith("--"));
+
+      const flags = {};
+      flagArgs.forEach((flag) => {
+        flags[flag] = true;
+      });
 
       const command = client.cmd.commands.get(cmd.toLowerCase());
       if (command) {

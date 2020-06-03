@@ -1,5 +1,6 @@
 module.exports = {
   name: "follow",
+  requiresArgs: true,
   description: "Follow a channel using its ID",
   usage: "{channel ID}",
   requiredPerms: ["MANAGE_WEBHOOKS"],

@@ -17,7 +17,7 @@ module.exports = {
       );
 
     const data = await msg.client.models.guildChannel.findOne({
-      channelID: args[0],
+      channelID: chan.id,
     });
     if (!data)
       return msg.channel.send(
